@@ -1,11 +1,15 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb, kReleaseMode;
 
 class ApiEndpoints {
   // Selects the correct host depending on the platform:
+  // - Production Release             → https://fintrack.net.ar
   // - Web (Chrome) and macOS desktop → localhost
   // - Android emulator               → 10.0.2.2  (maps to host machine)
   // - Physical device                → change to your machine's LAN IP
   static String get _host {
+    if (kReleaseMode) {
+      return 'https://fintrack.net.ar';
+    }
     if (kIsWeb) return 'http://127.0.0.1:8001';
     // Android emulator: return 'http://10.0.2.2:8000';
     return 'http://127.0.0.1:8001'; // macOS desktop / iOS simulator
