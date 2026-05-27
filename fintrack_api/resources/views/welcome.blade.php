@@ -1004,7 +1004,7 @@
 
                 <div class="download-buttons">
                     <!-- Android Direct Download Link -->
-                    <a href="/downloads/fintrack.apk" class="btn-download android">
+                    <a href="{{ asset('downloads/fintrack.apk') }}" class="btn-download android">
                         <svg viewBox="0 0 24 24">
                             <path
                                 d="M17.5 13.5c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5m-11 0c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.7 1.5-1.5 1.5m11.2-5.4L19.4 6c.2-.3.1-.7-.2-.9-.3-.2-.7-.1-.9.2L16.5 7C15.1 6.4 13.6 6 12 6s-3.1.4-4.5 1L5.7 5.3c-.2-.3-.6-.4-.9-.2-.3.2-.4.6-.2.9l1.7 2.1C4.3 9.7 3 12.1 3 14.8c0 .2 0 .3.1.5h17.8c0-.2.1-.3.1-.5 0-2.7-1.3-5.1-3.3-6.7zM12 18c-3.3 0-6.1-2-7.3-4.8h14.6c-1.2 2.8-4 4.8-7.3 4.8z" />
@@ -1028,7 +1028,7 @@
                     Debido a las estrictas políticas de Apple, no es posible autoinstalar directamente con un solo clic
                     como en Android.<br><br>
                     Para instalar el archivo IPA en tu iPhone de forma gratuita y sin la App Store, puedes descargar el
-                    instalador <strong><a href="/downloads/fintrack.ipa"
+                    instalador <strong><a href="{{ asset('downloads/fintrack.ipa') }}"
                             style="color: var(--accent); text-decoration: underline;">fintrack.ipa aquí</a></strong> y
                     utilizar herramientas seguras de sideloading independientes como <strong>AltStore</strong>,
                     <strong>Scarlet</strong>, o <strong>Sideloadly</strong> desde tu computadora.
