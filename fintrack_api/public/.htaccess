@@ -23,3 +23,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Add MIME types for mobile installers to prevent auto-renaming/extracting to .zip
+AddType application/octet-stream .ipa
+AddType application/vnd.android.package-archive .apk
