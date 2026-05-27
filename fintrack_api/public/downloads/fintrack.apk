@@ -1,0 +1,6 @@
+Este es un archivo marcador de posición (placeholder) de FinTrack.
+Por favor, reemplaza este archivo con tu APK compilado real en la ruta:
+fintrack_api/public/downloads/fintrack.apk
+
+Para compilar tu APK real, ejecuta en la carpeta fintrack_app:
+flutter build apk --release

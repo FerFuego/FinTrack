@@ -1,0 +1,87 @@
+name: Build Mobile Apps (Android & iOS)
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: # Permite disparar la compilación manualmente desde la web de GitHub
+
+jobs:
+  build-android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        working-directory: ./fintrack_app
+        run: flutter pub get
+
+      - name: Generate Dart code (build_runner)
+        working-directory: ./fintrack_app
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Build APK Release
+        working-directory: ./fintrack_app
+        run: flutter build apk --release
+
+      - name: Rename APK for downloads
+        working-directory: ./fintrack_app
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/fintrack.apk
+
+      - name: Upload Android APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fintrack-android-apk
+          path: fintrack_app/build/app/outputs/flutter-apk/fintrack.apk
+
+  build-ios:
+    name: Build Unsigned iOS IPA
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        working-directory: ./fintrack_app
+        run: flutter pub get
+
+      - name: Generate Dart code (build_runner)
+        working-directory: ./fintrack_app
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Build iOS App (No Code Signing)
+        working-directory: ./fintrack_app
+        run: flutter build ios --release --no-codesign
+
+      - name: Package IPA for Sideloading
+        working-directory: ./fintrack_app
+        run: |
+          mkdir -p Payload
+          mv build/ios/iphoneos/Runner.app Payload/
+          zip -r fintrack.ipa Payload
+
+      - name: Upload iOS IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fintrack-ios-ipa
+          path: fintrack_app/fintrack.ipa
