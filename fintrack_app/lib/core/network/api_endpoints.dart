@@ -10,9 +10,9 @@ class ApiEndpoints {
     if (kReleaseMode) {
       return 'https://fintrack.net.ar';
     }
-    if (kIsWeb) return 'http://127.0.0.1:8001';
+    if (kIsWeb) return 'http://127.0.0.1:8000';
     // Android emulator: return 'http://10.0.2.2:8000';
-    return 'http://127.0.0.1:8001'; // macOS desktop / iOS simulator
+    return 'http://127.0.0.1:8000'; // macOS desktop / iOS simulator
   }
 
   static String get baseUrl => '$_host/api';
