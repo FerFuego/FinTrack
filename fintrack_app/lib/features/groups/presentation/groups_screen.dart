@@ -198,7 +198,7 @@ class _GroupsScreenState extends ConsumerState<GroupsScreen> {
     final code = group.inviteCode!;
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.surface,
         title: Row(
           children: [
@@ -237,7 +237,7 @@ class _GroupsScreenState extends ConsumerState<GroupsScreen> {
           TextButton(
             onPressed: () {
               Clipboard.setData(ClipboardData(text: code));
-              Navigator.pop(context);
+              Navigator.pop(ctx);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Código copiado'), behavior: SnackBarBehavior.floating),
               );
@@ -245,7 +245,7 @@ class _GroupsScreenState extends ConsumerState<GroupsScreen> {
             child: const Text('Copiar código', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(ctx),
             child: const Text('Entendido', style: TextStyle(color: AppColors.textSecondary)),
           ),
         ],
@@ -311,7 +311,7 @@ class _GroupsScreenState extends ConsumerState<GroupsScreen> {
       if (mounted) {
         showDialog(
           context: context,
-          builder: (_) => AlertDialog(
+          builder: (ctx) => AlertDialog(
             backgroundColor: AppColors.surface,
             title: const Text('Código de invitación'),
             content: Column(
@@ -338,12 +338,16 @@ class _GroupsScreenState extends ConsumerState<GroupsScreen> {
               TextButton(
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: code));
-                  Navigator.pop(context);
+                  Navigator.pop(ctx);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Código copiado'), behavior: SnackBarBehavior.floating),
                   );
                 },
                 child: const Text('Copiar código', style: TextStyle(color: AppColors.primary)),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('Entendido', style: TextStyle(color: AppColors.textSecondary)),
               ),
             ],
           ),
